@@ -13,18 +13,19 @@ df_copy = df.drop(columns=['dateVal', 'categoryParent', 'comment', 'accountNum',
 df_copy['dateOp'] = pd.to_datetime(df_copy['dateOp'], errors='coerce')
 # Remove commas and convert 'amount' to float
 df_copy['amount'] = df_copy['amount'].str.replace(' ', '').str.replace(',', '.').astype(float)
-
-
 # Sort by date
 df_copy = df_copy.sort_values(by="dateOp")
+df_copy['Type'] = np.where(df_copy['amount'] < 0, 'Expenses', 'Income')
+cols = ['dateOp', 'Type', 'category', 'amount', 'label']
+df_copy = df_copy[cols]
 
 
 wb = openpyxl.load_workbook(path)
-
 sheet = wb["Tracking Budget"]
 
 # Define the starting row of the table
 table_start_row = 11  # Adjust this to where your table actually begins
+
 
 # Find the first empty row within the table
 first_empty_row = table_start_row
@@ -35,7 +36,7 @@ while sheet.cell(row=first_empty_row, column=2).value is not None:
 """for i in range(1, max_col + 1):
     cell_obj = sheet.cell(row=1, column=i)
     print(cell_obj.value)"""
-
+print(df_copy.info())
 #wb.save(path)
 
 
