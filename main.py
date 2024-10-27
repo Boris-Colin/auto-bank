@@ -1,15 +1,42 @@
 import pandas as pd
 import numpy as np
 import xlwt
+import openpyxl
 from xlwt import Workbook
 
-workbook = xlwt.Workbook()
+path = "C:\\Users\\1thom\\OneDrive\\Bureau\\Ultimate_Budget_Empty.xlsx"
 
-sheet = workbook.add_sheet("Sheet Name")
+wb = openpyxl.load_workbook(path)
 
-# Specifying style
-style = xlwt.easyxf('font: bold 1')
+sheet = wb["Tracking Budget"]
 
-# Specifying column
-sheet.write(0, 0, 'SAMPLE', style)
-workbook.save("sample.xls")
+# Note: The first row or
+# column integer is 1, not 0.
+
+# Cell object is created by using
+# sheet object's cell() method.
+cell_obj = sheet.cell(row = 12, column = 4)
+
+# Print value of cell object
+# using the value attribute
+print(cell_obj.value)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
