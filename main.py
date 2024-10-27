@@ -21,8 +21,19 @@ cell_obj = sheet.cell(row = 12, column = 4)
 # using the value attribute
 print(cell_obj.value)
 
+# print total number of column
+max_col = sheet.max_column
+print(max_col)
+# Loop will print all columns name
+for i in range(1, max_col + 1):
+    cell_obj = sheet.cell(row=1, column=i)
+    print(cell_obj.value)
 
+# B2 means column = 2 & row = 2.
+c4 = sheet['K10']
+c4.value = "RAI"
 
+wb.save(path)
 
 
 
