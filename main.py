@@ -19,6 +19,8 @@ df_copy['Type'] = np.where(df_copy['amount'] < 0, 'Expenses', 'Income')
 cols = ['dateOp', 'Type', 'category', 'amount', 'label']
 df_copy = df_copy[cols]
 
+print(df_copy.info())
+
 
 wb = openpyxl.load_workbook(path)
 sheet = wb["Tracking Budget"]
@@ -26,18 +28,18 @@ sheet = wb["Tracking Budget"]
 # Define the starting row of the table
 table_start_row = 11  # Adjust this to where your table actually begins
 
-
 # Find the first empty row within the table
 first_empty_row = table_start_row
 while sheet.cell(row=first_empty_row, column=2).value is not None:
     first_empty_row += 1
 
-# Loop will print all columns name
-"""for i in range(1, max_col + 1):
-    cell_obj = sheet.cell(row=1, column=i)
-    print(cell_obj.value)"""
-print(df_copy.info())
-#wb.save(path)
+
+for row_idx, row_data in enumerate(df_copy.values, start=first_empty_row):
+    for col_idx, value in enumerate(row_data, start=2):  # Start from column 1
+        sheet.cell(row=row_idx, column=col_idx, value=value)
+
+
+wb.save(path)
 
 
 
