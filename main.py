@@ -14,7 +14,7 @@ df_copy['dateOp'] = pd.to_datetime(df_copy['dateOp'], errors='coerce')
 # Remove commas and convert 'amount' to float
 df_copy['amount'] = df_copy['amount'].str.replace(' ', '').str.replace(',', '.').astype(float)
 
-# Add a 'year' column
+"""# Add a 'year' column
 df_copy['year'] = df_copy['dateOp'].dt.year
 # Add 'month' column
 df_copy['month'] = df_copy['dateOp'].dt.month
@@ -22,7 +22,10 @@ df_copy['month'] = df_copy['dateOp'].dt.month
 # Group by 'year' and 'month' and get the average sales
 monthly_ex = df_copy.groupby(['year', 'month'])['amount'].mean()
 
-print(monthly_ex)
+print(monthly_ex)"""
+
+# Sort by date
+df_copy = df_copy.sort_values(by="dateOp")
 
 
 wb = openpyxl.load_workbook(path)
