@@ -5,6 +5,9 @@ import openpyxl
 from xlwt import Workbook
 
 path = "C:\\Users\\1thom\\OneDrive\\Bureau\\Ultimate_Budget_Empty.xlsx"
+path2 = "C:\\Users\\1thom\\Downloads\\export-operations-27-10-2024_08-51-13.csv"
+
+df = pd.read_csv(path2, sep=';')
 
 wb = openpyxl.load_workbook(path)
 
@@ -25,14 +28,17 @@ print(cell_obj.value)
 max_col = sheet.max_column
 print(max_col)
 # Loop will print all columns name
-for i in range(1, max_col + 1):
+"""for i in range(1, max_col + 1):
     cell_obj = sheet.cell(row=1, column=i)
-    print(cell_obj.value)
+    print(cell_obj.value)"""
 
 # B2 means column = 2 & row = 2.
-c4 = sheet['K10']
-c4.value = "RAI"
+#c4 = sheet['K10']
+#c4.value = "RAI"
 
+print(df.describe())
+print(df.info())
+print(df.head())
 wb.save(path)
 
 
