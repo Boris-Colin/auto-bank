@@ -16,6 +16,8 @@ df_copy['amount'] = df_copy['amount'].str.replace(' ', '').str.replace(',', '.')
 # Sort by date
 df_copy = df_copy.sort_values(by="dateOp")
 df_copy['Type'] = np.where(df_copy['amount'] < 0, 'Expenses', 'Income')
+df_copy['amount'] = abs(df_copy['amount'])  # in my excel file the type takes care of the sign
+# so we only need positive values now
 cols = ['dateOp', 'Type', 'category', 'amount', 'label']
 df_copy = df_copy[cols]
 
@@ -39,7 +41,7 @@ for row_idx, row_data in enumerate(df_copy.values, start=first_empty_row):
         sheet.cell(row=row_idx, column=col_idx, value=value)
 
 
-wb.save(path)
+wb.save(path) 
 
 
 
