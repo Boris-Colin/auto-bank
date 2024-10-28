@@ -4,8 +4,8 @@ import xlwt
 import openpyxl
 from xlwt import Workbook
 
-path = "C:\\Users\\1thom\\OneDrive\\Bureau\\Ultimate_Budget_Empty.xlsx"
-path2 = "C:\\Users\\1thom\\Downloads\\export-operations-27-10-2024_08-51-13.csv"
+path = "C:\\Users\\1thom\\OneDrive\\Bureau\\Ultimate_Budget_Main.xlsx"
+path2 = "C:\\Users\\1thom\\Downloads\\export-operations-28-10-2024_08-06-51.csv"
 
 df = pd.read_csv(path2, sep=';')
 df_copy = df.drop(columns=['dateVal', 'categoryParent', 'comment', 'accountNum', 'accountLabel', 'accountbalance'])
@@ -22,7 +22,7 @@ cols = ['dateOp', 'Type', 'category', 'amount', 'label']
 df_copy = df_copy[cols]
 
 print(df_copy.info())
-
+ 
 
 wb = openpyxl.load_workbook(path)
 sheet = wb["Tracking Budget"]
